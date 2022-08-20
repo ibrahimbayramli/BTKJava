@@ -11,12 +11,12 @@ public class Main {
         ResultSet resultSet;
 
         try {
+            String sql="DELETE FROM city WHERE city_id>601";
             connection=dbHelper.getConnection();
-            statement=connection.prepareStatement("INSERT INTO city (city_id,city,country_id,last_update) " +
-                    "VALUES (601,'Kocaeli',110,'2006-02-15 09:45:25.000000')");
-            statement.executeUpdate("INSERT INTO city (city_id,city,country_id,last_update) " +
-                    "VALUES (601,'Kocaeli',110,'2006-02-15 09:45:25.000000')");
-            System.out.println("Guncellendi");
+            statement=connection.createStatement();
+            statement.executeUpdate(sql);
+
+            System.out.println("Silindi.");
 
 
         }catch (SQLException e){
@@ -53,5 +53,83 @@ public class Main {
         finally {
             connection.close();
         }
+
     }
+        public static void insertDemo() throws SQLException {
+            Connection connection=null;
+            DbHelper dbHelper=new DbHelper();
+            Statement statement =null;
+            ResultSet resultSet;
+
+            try {
+                String sql="INSERT INTO city (city,country_id,last_update) " +
+                        "VALUES ('Kocaeli',109,'2006-02-15 09:45:25.000000')";
+                connection=dbHelper.getConnection();
+                statement=connection.createStatement();
+                statement.executeUpdate(sql);
+
+                System.out.println("Eklendi.");
+
+
+            }catch (SQLException e){
+                dbHelper.showErrorMessage(e);
+            }
+            finally {
+                connection.close();
+            }
+
+
+        }
+
+
+
+
+        public static void updateDemo() throws SQLException {
+            Connection connection = null;
+            DbHelper dbHelper = new DbHelper();
+            Statement statement = null;
+            ResultSet resultSet;
+
+            try {
+                String sql = "UPDATE city SET city = 'Kocaeli guncel' WHERE city_id=603";
+                connection = dbHelper.getConnection();
+                statement = connection.createStatement();
+                statement.executeUpdate(sql);
+
+                System.out.println("Guncellendi.");
+
+
+            } catch (SQLException e) {
+                dbHelper.showErrorMessage(e);
+            } finally {
+                connection.close();
+            }
+
+        }
+
+    public static void deleteDemo() throws SQLException {
+        Connection connection=null;
+        DbHelper dbHelper=new DbHelper();
+        Statement statement =null;
+        ResultSet resultSet;
+
+        try {
+            String sql="DELETE FROM city WHERE city_id>601";
+            connection=dbHelper.getConnection();
+            statement=connection.createStatement();
+            statement.executeUpdate(sql);
+
+            System.out.println("Silindi.");
+
+
+        }catch (SQLException e){
+            dbHelper.showErrorMessage(e);
+        }
+        finally {
+            connection.close();
+        }
+
+
+    }
+
 }
